@@ -12,9 +12,36 @@ namespace SwatcherSample
     {
         static void Main(string[] args)
         {
+            Console.Title = "Hello World With Events!";
             Console.WriteLine("Starting up Swatcher...");
             //First, we need to create a configuration object to tell Swatcher how to run.
+            var config = CreateConfiguration();
 
+            var swatcher = new Swatcher(config);
+            swatcher.Changed += SwatcherOnChanged; 
+            swatcher.Created += SwatcherOnCreated;
+            swatcher.Deleted += SwatcherOnDeleted; 
+            swatcher.Renamed += SwatcherOnRenamed;
+            swatcher.Error += SwatcherOnError;
+            swatcher.Start();
+
+            Console.WriteLine("Swatcher has started and is listening for events...");
+            Console.ReadKey();
+
+            //Shutting down
+            swatcher.Stop();
+            //Unsubscribe after you Stop if you're done with the component.
+            swatcher.Changed -= SwatcherOnChanged;
+            swatcher.Created -= SwatcherOnCreated;
+            swatcher.Deleted -= SwatcherOnDeleted;
+            swatcher.Error -= SwatcherOnError;
+            swatcher.Renamed -= SwatcherOnRenamed;
+            //cleanup
+            swatcher.Dispose();
+        }
+
+        private static ISwatcherConfig CreateConfiguration()
+        {
             //The swatcherId parameter is nullable in case you don't want to use it. It really comes 
             //in handy when you are creating several Swatchers at runtime and you need to know from  
             //which Swatcher an event is being raised.
@@ -32,35 +59,11 @@ namespace SwatcherSample
             //see docs here: https://msdn.microsoft.com/en-us/library/system.io.notifyfilters(v=vs.110).aspx
             var notificationFilters = NotifyFilters.Attributes | NotifyFilters.CreationTime |
                                       NotifyFilters.DirectoryName | NotifyFilters.FileName |
-                                      NotifyFilters.LastAccess | NotifyFilters.LastWrite | 
+                                      NotifyFilters.LastAccess | NotifyFilters.LastWrite |
                                       NotifyFilters.Security | NotifyFilters.Size;
 
-            var config = new SwatcherConfig(swatcherId, folderPath,
-                changeTypes, itemTypes,notificationFilters);
-
-
-            var swatcher = new Swatcher(config);
-            swatcher.Changed += SwatcherOnChanged; 
-            swatcher.Created += SwatcherOnCreated;
-            swatcher.Deleted += SwatcherOnDeleted; 
-            swatcher.Renamed += SwatcherOnRenamed;
-            swatcher.Error += SwatcherOnError;
-            //We're running synchronously here, but await is fully supported.
-            swatcher.Start();
-
-            Console.WriteLine("Swatcher has started and is listening for events...");
-            Console.ReadKey();
-
-            //Shutting down
-            swatcher.Stop();
-            //Unsubscribe after you Stop if you're done with the component.
-            swatcher.Changed -= SwatcherOnChanged;
-            swatcher.Created -= SwatcherOnCreated;
-            swatcher.Deleted -= SwatcherOnDeleted;
-            swatcher.Error -= SwatcherOnError;
-            swatcher.Renamed -= SwatcherOnRenamed;
-            //cleanup
-            swatcher.Dispose();
+            return new SwatcherConfig(swatcherId, folderPath,
+                changeTypes, itemTypes, notificationFilters);
         }
 
         private static void SwatcherOnRenamed(object sender, SwatcherRenamedEventArgs e)
