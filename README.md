@@ -1,14 +1,13 @@
-# swatcher
-      The only FileSystemWatcher package that really works! No false positives, no fuss and a simple, intuitive API.
+# Swatcher - A FileSystemWatcher for .Net 
+If you've ever used the built-in FileSystemWatcher component for .Net, you know that it has issues. In addition to remediating said issues, Swatcher augments the functionality of FileSystemWatcher to make the developers life easy, all with an intuitive API and very little boiletplate.
+
+#### Features
+* No false change notifications when a file system item is created, deleted or renamed.
+* When a large file is being uploaded, copied or moved, Swatcher will wait until the IO operations are completed before sending a creation notice. 
+* In addition to the aforementioned, `SwatcherCreatedEventArgs` includes a `TimeInTransit` property to inform you as to how long the IO operation took.
+
+#### Installation
+Swatcher is installed using [NuGet link](https://www.nuget.org/packages/Swatcher/):
+`Install-Package Swatcher`
       
-      The package can be installed in your project via nuget using:
-      Install-Package Swatcher
-      
-      The HelloWorld solution contains two projects: one for consuming a Swatcher via events and a second one that shows how to consume a Swatcher using Rx observables.
-      
-      I will be working on the wiki over the next few weeks.
-      You may contact me via email martin@mizzellconsulting.com in the interim if you have any questions.
-      
-      FULL DISCLOSURE: This is a beta version of a product that will be commercialized once it has been run through the paces with the public. That said, I'm not placing any restrictions in the beta assemblies and license is hereby granted to use with those versions for as long as you so desire.
-      
-      
+#### Documentation in Progress!
