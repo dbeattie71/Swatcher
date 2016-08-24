@@ -7,7 +7,7 @@ If you've ever used the built-in FileSystemWatcher component for .Net, you know 
 * In addition to the aforementioned, `SwatcherCreatedEventArgs` includes a `TimeInTransit` property to inform you as to how long the IO operation took.
 
 #### Installation
-Swatcher is installed using [NuGet link](https://www.nuget.org/packages/Swatcher/):
+Swatcher is installed using [NuGet](https://www.nuget.org/packages/Swatcher/):
 `Install-Package Swatcher`
       
 #### Documentation in Progress!
