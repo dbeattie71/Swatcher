@@ -41,5 +41,5 @@ Swatcher is installed using [NuGet](https://www.nuget.org/packages/Swatcher/):
 
 #### Consuming a Swatcher
 There are two different ways a Swatcher can be consumed:
-* Using .Net events
-* Using Rx via IObservable<>
+* [Usage via Events](https://github.com/MizzellConsulting/Swatcher/wiki/Usage-via-Events)
+* [Usage via Rx Observables](https://github.com/MizzellConsulting/Swatcher/wiki/Usage-via-Rx-Observables)
