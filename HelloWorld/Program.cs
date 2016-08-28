@@ -4,6 +4,8 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Logging;
+using Common.Logging.Simple;
 using MizzellConsulting.Swatcher;
 
 namespace SwatcherSample
@@ -23,6 +25,10 @@ namespace SwatcherSample
             swatcher.Deleted += SwatcherOnDeleted; 
             swatcher.Renamed += SwatcherOnRenamed;
             swatcher.Error += SwatcherOnError;
+
+            var logger = LogManager.Adapter = new DebugLoggerFactoryAdapter();
+
+            swatcher.Start(logger.GetLogger(typeof(Swatcher)));
             swatcher.Start();
 
             Console.WriteLine("Swatcher has started and is listening for events...");
@@ -49,7 +55,7 @@ namespace SwatcherSample
             //The folderPath parameter is the path to a folder that you want Swatcher to watch.
             //UNC paths are not supported! If you want to monitor a network folder, you need to map
             //it as a drive.
-            var folderPath = @"C:\Users\Martin\Desktop";
+            var folderPath = @"C:\Users\marti\Desktop";
             //The changeTypes parameter is an bitwise OR of the change types that you want Swatcher to tell you about.
             //see docs here: https://msdn.microsoft.com/en-us/library/t6xf43e0(v=vs.110).aspx
             var changeTypes = WatcherChangeTypes.All;
@@ -68,22 +74,24 @@ namespace SwatcherSample
 
         private static void SwatcherOnRenamed(object sender, SwatcherRenamedEventArgs e)
         {
-            Console.WriteLine($"[Renamed] Id:{e.SwatcherId ?? 0}, OldName: {e.OldName}, Name: {e.Name}, ChangeType: {e.ChangeType}, Timestamp:{e.Timestamp.ToLocalTime()}");
+            Console.WriteLine($"[Renamed] Id:{e.SwatcherId ?? 0}, OldName: {e.OldName}, Name: {e.Name}, ChangeType: {e.ChangeType}, Received:{e.ReceivedTime.ToLocalTime()}");
         }
 
         private static void SwatcherOnDeleted(object sender, SwatcherEventArgs e)
         {
-            Console.WriteLine($"[Deleted] Id:{e.SwatcherId ?? 0}, Name: {e.Name}, ChangeType: {e.ChangeType}, Timestamp:{e.Timestamp.ToLocalTime()}");
+            Console.WriteLine($"[Deleted] Id:{e.SwatcherId ?? 0}, Name: {e.Name}, ChangeType: {e.ChangeType}, Received:{e.ReceivedTime.ToLocalTime()}");
         }
 
-        private static void SwatcherOnCreated(object sender, SwatcherEventArgs e)
+        private static void SwatcherOnCreated(object sender, SwatcherCreatedEventArgs e)
         {
-            Console.WriteLine($"[Created] Id:{e.SwatcherId ?? 0}, Name: {e.Name}, ChangeType: {e.ChangeType}, Timestamp:{e.Timestamp.ToLocalTime()}");
+            Console.WriteLine($"-[Created] Id:{e.SwatcherId ?? 0}, Name: {e.Name}, ChangeType: {e.ChangeType}");
+            Console.WriteLine(
+                $"---Received: {e.ReceivedTime.ToLocalTime()}, Completed: {e.CompletedTime.ToLocalTime()}, ProcessingTime: {e.ProcessingTime}");
         }
 
         private static void SwatcherOnChanged(object sender, SwatcherEventArgs e)
         {
-            Console.WriteLine($"[Changed] Id:{e.SwatcherId ?? 0}, Name: {e.Name}, ChangeType: {e.ChangeType}, Timestamp:{e.Timestamp.ToLocalTime()}");
+            Console.WriteLine($"[Changed] Id:{e.SwatcherId ?? 0}, Name: {e.Name}, ChangeType: {e.ChangeType}, Received:{e.ReceivedTime.ToLocalTime()}");
         }
         private static void SwatcherOnError(object sender, SwatcherErrorEventArgs e)
         {

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reactive.Disposables;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Logging;
+using Common.Logging.Simple;
 using MizzellConsulting.Swatcher;
 
 namespace ReactiveHelloWorld
@@ -19,26 +21,27 @@ namespace ReactiveHelloWorld
             var disposables = new CompositeDisposable();
             var config = CreateConfiguration();
             var swatcher = new ObservableSwatcher(config);
-            swatcher.Start();
 
             swatcher.Changed.Subscribe(x =>
             {
                 Console.WriteLine(
-                    $"[Changed] Id:{x.SwatcherId ?? 0}, Name: {x.Name}, ChangeType: {x.ChangeType}, Timestamp:{x.Timestamp.ToLocalTime()}");
+                    $"[Changed] Id:{x.SwatcherId ?? 0}, Name: {x.Name}, ChangeType: {x.ChangeType}, Received:{x.ReceivedTime.ToLocalTime()}");
             })
             .DisposeWith(disposables);
 
             swatcher.Created.Subscribe(x =>
             {
                 Console.WriteLine(
-                    $"[Created] Id:{x.SwatcherId ?? 0}, Name: {x.Name}, ChangeType: {x.ChangeType}, Timestamp:{x.Timestamp.ToLocalTime()}");
+                    $"-[Created] Id:{x.SwatcherId ?? 0}, Name: {x.Name}, ChangeType: {x.ChangeType}, Received:{x.ReceivedTime.ToLocalTime()}");
+                Console.WriteLine(
+                    $"---Received: {x.ReceivedTime.ToLocalTime()}, Completed: {x.CompletedTime.ToLocalTime()}, ProcessingTime: {x.ProcessingTime}");
             })
             .DisposeWith(disposables);
 
             swatcher.Deleted.Subscribe(x =>
             {
                 Console.WriteLine(
-                    $"[Deleted] Id:{x.SwatcherId ?? 0}, Name: {x.Name}, ChangeType: {x.ChangeType}, Timestamp:{x.Timestamp.ToLocalTime()}");
+                    $"[Deleted] Id:{x.SwatcherId ?? 0}, Name: {x.Name}, ChangeType: {x.ChangeType}, Received:{x.ReceivedTime.ToLocalTime()}");
             })
             .DisposeWith(disposables);
 
@@ -52,12 +55,17 @@ namespace ReactiveHelloWorld
             swatcher.Renamed.Subscribe(x =>
             {
                 Console.WriteLine(
-                    $"[Renamed] Id:{x.SwatcherId ?? 0}, OldName: {x.OldName}, Name: {x.Name}, ChangeType: {x.ChangeType}, Timestamp:{x.Timestamp.ToLocalTime()}");
+                    $"[Renamed] Id:{x.SwatcherId ?? 0}, OldName: {x.OldName}, Name: {x.Name}, ChangeType: {x.ChangeType}, Received:{x.ReceivedTime.ToLocalTime()}");
             })
             .DisposeWith(disposables);
 
+            var logger = LogManager.Adapter = new ConsoleOutLoggerFactoryAdapter();
+            swatcher.Start(logger.GetLogger(typeof(ObservableSwatcher)));
+
             Console.WriteLine("Swatcher has started and is listening for events...");
             Console.ReadKey();
+
+            //Do stuff in your monitored folder....
 
             //Shutting down
             swatcher.Stop();
@@ -77,7 +85,7 @@ namespace ReactiveHelloWorld
             //The folderPath parameter is the path to a folder that you want Swatcher to watch.
             //UNC paths are not supported! If you want to monitor a network folder, you need to map
             //it as a drive.
-            var folderPath = @"C:\Users\Martin\Desktop";
+            var folderPath = @"<your folder path>";
             //The changeTypes parameter is an bitwise OR of the change types that you want Swatcher to tell you about.
             //see docs here: https://msdn.microsoft.com/en-us/library/t6xf43e0(v=vs.110).aspx
             var changeTypes = WatcherChangeTypes.All;
