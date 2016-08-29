@@ -5,6 +5,8 @@ If you've ever used the built-in FileSystemWatcher component for .Net, you know 
 * No false change notifications when a file system item is created, deleted or renamed.
 * When a large file is being uploaded, copied or moved, Swatcher will wait until the IO operations are completed before sending a creation notice. 
 * In addition to the aforementioned, `SwatcherCreatedEventArgs` includes a `TimeInTransit` property to inform you as to how long the IO operation took.
+* In the `ISwatcherConfig`, you can specify a custom filter for `Created`, `Changed`, `Deleted` and `Renamed` events so an event is never raised for stuff you're not interested in.
+* I added `Common.Logging` to enable developers to "hook" diagnostic info as a Swatcher is processing changes. Thus, you'll be able to seamlessly integrate a Swatcher with whatever logging mechanism you're using. Create an issue for info your interested in and I will consider adding it to the product!
 
 #### Installation
 Swatcher is installed using [NuGet](https://www.nuget.org/packages/Swatcher/):
