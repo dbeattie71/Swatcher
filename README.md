@@ -1,5 +1,5 @@
-# Swatcher - A FileSystemWatcher for .Net 
-If you've ever used the built-in FileSystemWatcher component for .Net, you know that it has issues. In addition to remediating said issues, Swatcher augments the functionality of FileSystemWatcher to make the developers life easy, all with an intuitive API and very little boiletplate.
+# Swatcher - Say goodbye to the woes of FileSystemWatcher!
+The FileSystemWatcher is great for demo apps. For production code? Not so much. Swatcher was written from the ground-up to replace FileSystemWatcher and add the features you need: speed, reliability, events raised when they're supposed to be and an intuitive API that's awesome. Heck, it even provides both observables and events to cater to your coding style. 
 
 #### Features
 * No false change notifications when a file system item is created, deleted or renamed.
