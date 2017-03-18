@@ -1,0 +1,40 @@
+﻿<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Swatcher</id>
+    <version>$Version$</version>
+    <title>Swatcher</title>
+    <authors>Martin Mizzell</authors>
+    <owners>Brave Lantern</owners>
+    <description>
+      Reliable, real-time file system monitoring with an intuitive API that developers everywhere love.
+    </description>
+    <releaseNotes>
+      -Swatcher RTW build!
+      -Fixed memory leak
+      -Start/Stop are now async 
+      -Performance improvements
+      -LibLog integration. If you use well-known loggers, Swatcher will likely log out of the box for you.
+        See https://github.com/damianh/LibLog for more information.
+    </releaseNotes>
+    <summary>
+      Reliable, real-time file system monitoring with an intuitive API that developers everywhere love. Swatcher' external API was made to feel similar to FileSystemWatcher so the learning curve is very low. Under the hood, however, it's a completely different story! 500 development hours have been invested in creating the fastest, most reliable file system monitoring possible via IOCompletionPorts and Reactive Extensions.  
+    </summary>
+    <language>en-US</language>
+    <projectUrl>https://github.com/bravelantern/swatcher</projectUrl>
+    <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
+    <requireLicenseAcceptance>true</requireLicenseAcceptance>
+    <licenseUrl>https://www.bravelantern.com/licenseagreement</licenseUrl>
+    <copyright>© 2017 Brave Lantern</copyright>
+    <dependencies>
+        <group targetFramework="net462">
+          <dependency id="System.Reactive" version="3.1.1" />
+        </group>
+    </dependencies>
+    <references></references>
+    <tags>filesystemwatcher rx swatcher reactive io filesystemevent monitor</tags>
+  </metadata>
+  <files>
+    <file src="bin\Release\BraveLantern.Swatcher.xml" target="lib" />
+  </files>
+</package>
