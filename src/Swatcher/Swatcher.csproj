@@ -129,11 +129,9 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
-    <None Include="Swatcher.nuspec" />
     <None Include="Swatcher.snk" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="C:\Program Files (x86)\XHEO\DeployLX\v5.0\DeployLX.CodeVeil.targets" Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' " />
   <PropertyGroup>
     <PostBuildEvent>
     </PostBuildEvent>

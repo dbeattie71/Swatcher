@@ -20,3 +20,4 @@ mkdir Build
 mkdir Build\lib
 mkdir Build\lib\net45
 
+%nuget% pack "src\Swatcher.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
