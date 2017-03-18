@@ -145,5 +145,7 @@
   <Target Name="AfterBuild">
   </Target>
   -->
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="license.txt" />
+  </ItemGroup>
 </Project>
