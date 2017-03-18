@@ -2,7 +2,7 @@
 <package >
   <metadata>
     <id>Swatcher</id>
-    <version>$Version$</version>
+    <version>$version$</version>
     <title>Swatcher</title>
     <authors>Martin Mizzell</authors>
     <owners>Brave Lantern</owners>
@@ -25,7 +25,7 @@
     <iconUrl>https://nuget.org/Content/Images/packageDefaultIcon-50x50.png</iconUrl>
     <requireLicenseAcceptance>true</requireLicenseAcceptance>
     <licenseUrl>https://www.bravelantern.com/licenseagreement</licenseUrl>
-    <copyright>© 2017 Brave Lantern</copyright>
+    <copyright>&#x00A9; Brave Lantern. All rights reserved.</copyright>
     <dependencies>
         <group targetFramework="net462">
           <dependency id="System.Reactive" version="3.1.1" />
@@ -35,6 +35,7 @@
     <tags>filesystemwatcher rx swatcher reactive io filesystemevent monitor</tags>
   </metadata>
   <files>
-    <file src="bin\Release\BraveLantern.Swatcher.xml" target="lib" />
+    <file src="Swatcher\bin\$configuration$\BraveLantern.Swatcher.dll" target="lib\net45\" />
+    <file src="Swatcher\bin\$configuration$\BraveLantern.Swatcher.xml" target="lib\net45\" />
   </files>
 </package>
