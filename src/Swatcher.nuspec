@@ -12,13 +12,13 @@
     <releaseNotes>
       -Swatcher RTW build!
       -Fixed memory leak
-      -Start/Stop are now async 
+      -Start/Stop are now async
       -Performance improvements
       -LibLog integration. If you use well-known loggers, Swatcher will likely log out of the box for you.
         See https://github.com/damianh/LibLog for more information.
     </releaseNotes>
     <summary>
-      Reliable, real-time file system monitoring with an intuitive API that developers everywhere love. Swatcher' external API was made to feel similar to FileSystemWatcher so the learning curve is very low. Under the hood, however, it's a completely different story! 500 development hours have been invested in creating the fastest, most reliable file system monitoring possible via IOCompletionPorts and Reactive Extensions.  
+      Reliable, real-time file system monitoring with an intuitive API that developers everywhere love. Swatcher' external API was made to feel similar to FileSystemWatcher so the learning curve is very low. Under the hood, however, it's a completely different story! 500 development hours have been invested in creating the fastest, most reliable file system monitoring possible via IOCompletionPorts and Reactive Extensions.
     </summary>
     <language>en-US</language>
     <projectUrl>https://github.com/bravelantern/swatcher</projectUrl>
@@ -29,6 +29,12 @@
     <dependencies>
         <group targetFramework="net462">
           <dependency id="System.Reactive" version="3.1.1" />
+          <dependency id="System.Reactive.Core" version="3.1.1"/>
+          <dependency id="System.Reactive.Interfaces" version="3.1.1"/>
+          <dependency id="System.Reactive.Linq" version="3.1.1"/>
+          <dependency id="System.Reactive.PlatformServices" version="3.1.1"/>
+          <dependency id="System.Reactive.Threading" version="3.1.1"/>
+          <dependency id="System.Reactive.Windows.Threading" version="3.1.1"/>
         </group>
     </dependencies>
     <references></references>
