@@ -14,10 +14,11 @@ if "%nuget%" == "" (
 	set nuget=nuget
 )
 
+nuget restore src\Swatcher.sln
 %WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild src\Swatcher.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
 
 mkdir Build
 mkdir Build\lib
 mkdir Build\lib\net45
 
-%nuget% pack "src\Swatcher.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
+nuget pack "src\Swatcher.nuspec" -NoPackageAnalysis -verbosity detailed -o Build -Version %version% -p Configuration="%config%"
