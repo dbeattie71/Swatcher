@@ -1,4 +1,4 @@
-@echo Off
+@echo On
 set config=%1
 if "%config%" == "" (
    set config=Release
@@ -10,7 +10,7 @@ if not "%PackageVersion%" == "" (
 )
 
 set nuget=nuget\nuget.exe
-
+echo %nuget%
 nuget restore src\Swatcher.sln
 
 %WINDIR%\Microsoft.NET\Framework\v4.0.30319\msbuild src\Swatcher.sln /p:Configuration="%config%" /m /v:M /fl /flp:LogFile=msbuild.log;Verbosity=diag /nr:false
