@@ -35,7 +35,7 @@
     <tags>filesystemwatcher rx swatcher reactive io filesystemevent monitor</tags>
   </metadata>
   <files>
-    <file src="Swatcher\bin\$configuration$\BraveLantern.Swatcher.dll" target="lib\net45\" />
-    <file src="Swatcher\bin\$configuration$\BraveLantern.Swatcher.xml" target="lib\net45\" />
+    <file src="Swatcher\bin\BraveLantern.Swatcher.dll" target="lib\net45\" />
+    <file src="Swatcher\bin\BraveLantern.Swatcher.xml" target="lib\net45\" />
   </files>
 </package>
